@@ -9,10 +9,8 @@
                 "-g",
                 "-Wall",
                 "-std=c++17",
-                "mythread.cpp", 
-                "mythread2.cpp",
-                "auto_ptr.cpp",
-                "./DesignPatternCode/Vistor.cpp",
+                "vector.cpp",
+                // "./DesignPatternCode/Vistor.cpp",
                 "-o",
                 "main.exe"
             ],

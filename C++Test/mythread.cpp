@@ -1,10 +1,7 @@
 #include <thread>
 #include <atomic>
-#include <stdio.h>
 #include <string>
-
 #include <iostream>
-#include <vector>
 #include <list>
 
 using namespace std; 
@@ -25,7 +22,6 @@ void threadfun2(int iParam, string sParam)
     this_thread::sleep_for(chrono::seconds(5));
     cout << "threadfun2 - 2" << endl;
 }
-
 
 void threadfun12()
 {
@@ -51,7 +47,7 @@ int test_thread(void)
     return 0;
 }
 
-int thread_main(void)
+int main(void)
 {
     atomic_bool b(0);
     list<thread> lstThread;
@@ -63,5 +59,6 @@ int thread_main(void)
     {
         th.join();
     }
+    system("pause");
     return 0;
 }

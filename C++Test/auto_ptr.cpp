@@ -57,7 +57,7 @@ public:
     weak_ptr<TestA> m_testA_ptr; //TestA的智能指针
 };
 
-int ptr_main()
+int main()
 {
     shared_ptr<TestA> ptr_a = make_shared<TestA>();
     shared_ptr<TestB> ptr_b = make_shared<TestB>();
@@ -66,14 +66,17 @@ int ptr_main()
     ptr_b->ReferTestA(ptr_a);
     cout<<"1 ref a:"<<ptr_a.use_count()<<endl;
     cout<<"1 ref b:"<<ptr_a.use_count()<<endl;
-    return 0;
-    // shared_ptr<TestA> p1 = make_shared<TestA>();
-    // cout<<"1 ref:"<<p1.use_count()<<endl;
-    // {
-    //     shared_ptr<TestA> p2 = p1;
-    //     cout<<"2 ref:"<<p1.use_count()<<endl;
-    // }
 
-    // cout<<"3 ref:"<<p1.use_count()<<endl;
-    // return 0;
+    shared_ptr<TestA> p1 = make_shared<TestA>();
+    cout<<"1 ref:"<<p1.use_count()<<endl;
+    {
+        shared_ptr<TestA> p2 = p1;
+        cout<<"2 ref:"<<p1.use_count()<<endl;
+    }
+
+    cout<<"3 ref:"<<p1.use_count()<<endl;
+    
+    system("pause");
+    
+    return 0;
 }

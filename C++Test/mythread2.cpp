@@ -1,11 +1,7 @@
 #include <thread>
 #include <atomic>
-#include <stdio.h>
-#include <string>
 
 #include <iostream>
-#include <vector>
-#include <list>
 #include <mutex>
 #include <condition_variable>
 
@@ -33,7 +29,7 @@ void go()
     cv.notify_all();
 }
 
-int thread2_main(void)
+int main(void)
 {
     thread threads[10];
     for(int i = 0;i<10;i++)
@@ -44,5 +40,8 @@ int thread2_main(void)
     go();
 
     for(auto & th: threads) th.join();
+    
+    system("pause");
+
     return 0;
 }
