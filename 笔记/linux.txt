@@ -1,0 +1,90 @@
+在 vmware 中安装了 ubuntu ，不知道为什么找不到eth0 了
+只有一个loopback interface
+通过google ，修改 /etc/network/interfaces 文件，就可以了
+1. sudo vi /etc/network/interfaces
+2. 加入： 
+auto eth0
+iface eth0 inet dhcp
+3. 保存推出
+4. sudo ifup eth0
+
+
+查看linux版本：lsb_release -a
+
+centos 
+防火墙 ufw
+
+chkconfig
+
+df -h /usr/
+du --max-depth=1 -h /usr/
+# df -h # 查看各分区使用情况 
+# du -sh <目录名> # 查看指定目录的大小 
+
+iftop -i eth0 这条命令可以看到 网络出口的 流量情况
+
+--连接的状态统计
+netstat -np | awk '{print $6}'|sort|uniq -c|sort
+
+--找出各个ip的连接数
+netstat -ntu |awk '{print $5}'|cut -d: -f1|sort |uniq -c |sort -n
+
+查看centos版本号
+cat /etc/redhat-release
+cat /etc/issue
+
+# uname -a # 查看内核/操作系统/CPU信息 
+# head -n 1 /etc/issue # 查看操作系统版本 
+# cat /proc/cpuinfo # 查看CPU信息 
+# hostname # 查看计算机名 
+# lspci -tv # 列出所有PCI设备 
+# lsusb -tv # 列出所有USB设备 
+# lsmod # 列出加载的内核模块 
+# env # 查看环境变量资源 
+# free -m # 查看内存使用量和交换区使用量 
+# grep MemTotal /proc/meminfo # 查看内存总量 
+# grep MemFree /proc/meminfo # 查看空闲内存量 
+# cat /proc/loadavg # 查看系统负载磁盘和分区 
+# mount | column -t # 查看挂接的分区状态 
+# fdisk -l # 查看所有分区 
+# swapon -s # 查看所有交换分区 
+# hdparm -i /dev/hda # 查看磁盘参数(仅适用于IDE设备) 
+# dmesg | grep IDE # 查看启动时IDE设备检测状况网络 
+# iptables -L # 查看防火墙设置 
+# route -n # 查看路由表 
+# netstat -lntp # 查看所有监听端口 
+# netstat -antp # 查看所有已经建立的连接 
+# netstat -s # 查看网络统计信息进程 
+# w # 查看活动用户 
+# id <用户名> # 查看指定用户信息 
+# last # 查看用户登录日志 
+# cut -d: -f1 /etc/passwd # 查看系统所有用户 
+# cut -d: -f1 /etc/group # 查看系统所有组 
+# crontab -l # 查看当前用户的计划任务服务 
+# chkconfig –list # 列出所有系统服务 
+# chkconfig –list | grep on # 列出所有启动的系统服务程序 
+# rpm -qa # 查看所有安装的软件包
+
+
+修改root 访问端口 /etc/ssh/sshd_config
+
+修改主机名
+vi /etc/sysconfig/network
+vi /etc/hostname
+
+性能分析
+sar
+
+怀疑CPU存在瓶颈，可用 sar -u 和 sar -q 等来查看
+怀疑内存存在瓶颈，可用 sar -B、sar -r 和 sar -W 等来查看
+怀疑I/O存在瓶颈，可用 sar -b、sar -u 和 sar -d 等来查看 
+
+kubernetes环境
+https://www.jianshu.com/p/832bcd89bc07
+
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
+
+minikube start --registry-mirror=https://registry.docker-cn.com --kubernetes-version v1.12.1
+
+
+日志切割 logrotate

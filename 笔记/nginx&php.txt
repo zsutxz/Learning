@@ -1,0 +1,48 @@
+http://www.crsay.com/network/compile_php_5-6.html
+
+
+PHP的安装最头疼的就是因为某些类库没有安装而报错，所以编译前请确保以下包已安装
+
+I. 准备
+yum groupinstall "development tools"
+yum install -y gcc gcc-c++ autoconf libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libpng libpng-devel libxml2 libxml2-devel zlib zlib-devel glibc glibc-devel glib2 glib2-devel bzip2 bzip2-devel ncurses curl curl-devel openssl-devel gdbm-devel db4-devel libXpm-devel libX11-devel gd-devel gmp-devel readline-devel libxslt-devel expat-devel xmlrpc-c xmlrpc-c-devel
+
+II. 编译
+
+./configure --prefix=/usr/local/php --with-pdo-pgsql --with-pdo-sqlite --with-zlib-dir --with-freetype-dir --enable-mbstring --with-libxml-dir=/usr --enable-xmlreader --enable-xmlwriter --enable-soap --enable-calendar --with-curl --with-mcrypt --with-zlib --with-gd --with-pgsql --disable-rpath --enable-inline-optimization --with-bz2 --with-zlib --enable-sockets --enable-sysvsem --enable-sysvshm --enable-pcntl --enable-mbregex --enable-exif --enable-bcmath --with-mhash --enable-zip --with-pcre-regex --with-mysql --with-pdo-mysql --with-mysqli --with-mysql-sock --enable-mysqlnd --with-jpeg-dir=/usr --with-png-dir=/usr --enable-gd-native-ttf --with-openssl --enable-ftp --with-imap=/usr/local/php-imap --with-imap-ssl --with-kerberos --with-gettext --with-xmlrpc --with-xsl --enable-opcache --enable-fpm --with-fpm-user=www --with-fpm-group=www 
+
+
+III. 找到二进制文件
+whereis php
+#/usr/local/bin/php
+echo $PATH
+#/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
+export PATH=/usr/local/php/bin:$PATH
+echo $PATH
+#/usr/local/php/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
+php -v
+#PHP 5.6.0 (cli) (built: Sep 10 2014 23:54:43)
+
+
+vim /etc/profile
+在最后一行加上:export PATH="/usr/local/php/bin:$PATH"
+
+
+V. 配置文件
+cp /tmp/php-5.6.0/php.ini-production /usr/local/php/etc/php.ini
+
+VI. 启动php-fpm
+/usr/local/php/sbin/php-fpm
+
+/usr/local/php/sbin/php-fpm -c /usr/local/php/etc/php.ini -y /usr/local/php/etc/php-fpm.conf
+
+
+vim /etc/rc.local
+# ADD
+/usr/local/php/sbin/php-fpm -c /usr/local/php/etc/php.ini -y /usr/local/php/etc/php-fpm.conf
+
+VII. 配置php-fpm
+配置文件路径/usr/local/php/etc/php-fpm.conf
+
+
+strace  /usr/local/php/bin/php -i 2> /tmp/1.log

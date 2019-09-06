@@ -1,0 +1,100 @@
+https://redis.io/download 4.0.10
+redis自启动配置：
+参考h5 阿里服务器的配置
+启动文件centos和ubutu的不同，
+centos使用init.d 下的redis 
+ubuntu使用 init.d 下的redis_server 
+注意自启动的pid,conf文件的目录。数据库文件存储位置等
+还有stop要使用-a password.
+添加启动目录：
+PATH=$PATH:$HOME/bin:/usr/redis
+
+service redis start 
+
+安装mysql：yum -y install mysql
+
+centos 清除 mysql ：
+https://www.cnblogs.com/cyl048/p/6879085.html
+安装命令 mysql ：
+https://www.cnblogs.com/bigbrotherer/p/7241845.html
+查看版本号 mysql -V
+
+mysql备份： mysqldump -h sealy_DBLink -u sealy -p1aly_DBL356 db_fish > /data/game/bak20180903.sql
+
+修改mysql root密码：
+配置文件/etc/my.cnf中
+[mysqld]最后一行加入
+skip-grant-tables
+再使用
+update user set authentication_string=password('123456') where User="root";
+flush privileges; 
+grant all on *.* to 'root'@'localhost' identified by '123456' with grant option;
+ALTER USER 'root'@'localhost' IDENTIFIED BY '123456#';
+
+create user
+grant all privileges on `test`.* to 'sealy'@'%' identified by '10000';  
+
+ALTER TABLE `db_h5_game`.`open_info`
+CHANGE COLUMN `nickname` `nickname` VARCHAR(64) CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_general_ci';
+
+GRANT ALL PRIVILEGES ON lichuang.* TO 'sealy'@'127.0.0.1' IDENTIFIED BY 'passwd123' WITH GRANT OPTION;
+
+show status ——显示状态信息（扩展show status like ‘XXX’）
+show variables ——显示系统变量（扩展show variables like ‘XXX’）Mysql>
+show innodb status ——显示InnoDB存储引擎的状态Mysql> 
+show processlist ——查看当前SQL执行，包括执行状态、是否锁表等Shell> 
+mysqladmin variables -u username -p password——显示系统变量Shell> mysqladmin extended-status -u username -p password
+
+
+1  停机，关闭服务器备份数据库后 
+mysqldump -u root -p#sealy2018Tec db_secret_box >db_secret_box.sql
+mysqldump -u root -p#sealy2018Tec lichuang >lichuang.sql
+
+tar 压缩一下
+
+上传文件： scp -P 18300 *.gzip sealy@114.67.29.168:/home/sealy/
+
+在机器114.67.29.168 解压tar 文件，后还原数据库
+创建数据库
+mysql  -h 10.13.158.186 -u root -pS567ul1ZC1pN9# -e "create database db_secret_box"
+mysql  -h 10.13.158.186 -u root -pS567ul1ZC1pN9# -e "create database lichuang"
+还原数据库
+mysql  -h 10.13.158.186 -u root -pS567ul1ZC1pN9# db_secret_box<db_secret_box.sql.gzip
+mysql  -h 10.13.158.186 -u root -pS567ul1ZC1pN9# lichuang<lichuang.sql.gzip
+
+
+GRANT SELECT, INSERT, UPDATE, REFERENCES, DELETE, CREATE, DROP, ALTER, INDEX, CREATE VIEW, SHOW VIEW ON `test`.* TO 'test02'@'localhost';
+
+
+GRANT ALL PRIVILEGES ON db_secret_box.* TO 'sealy'@'10.13.158.186' IDENTIFIED BY 'LcDB2018_356' WITH GRANT OPTION;
+
+
+show variables like '%slow%';
+show global status like '%slow%';
+show processlist; 
+
+mysqldump -h 10.13.158.186 -u root -pS567ul1ZC1pN9# db_secret_box machine_control_info  --where="machine_id>0" >'/data/test.sql'
+
+
+mysql查看执行sql语句的记录日志
+1、使用processlist，但是有个弊端，就是只能查看正在执行的sql语句，对应历史记录，查看不到。好处是不用设置，不会保存。
+
+-- use information_schema;
+-- show processlist;
+
+或者：
+
+-- select * from information_schema.`PROCESSLIST` where info is not null;
+2、开启日志模式
+
+-- 1、设置
+-- SET GLOBAL log_output = 'TABLE';SET GLOBAL general_log = 'ON';  //日志开启
+-- SET GLOBAL log_output = 'TABLE'; SET GLOBAL general_log = 'OFF';  //日志关闭
+
+-- 2、查询
+SELECT * from mysql.general_log ORDER BY event_time DESC;
+-- 3、清空表（delete对于这个表，不允许使用，只能用truncate）
+
+-- truncate table mysql.general_log;
+
+ 
