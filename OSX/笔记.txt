@@ -1,0 +1,37 @@
+1��apt-get install: �ǵ�ʹ��sudo��
+2��apacheĿ¼��/etc/init.d/apache2 �£���־��/var/log/apache2�¡�
+3��΢�Ŷ�ά��֧������Ҫphp�� image php5-gd php5-curl���֧�֡�
+4��webmin����Զ�̻�����apache��msyql��php�ȡ�
+
+http://www.ishadowsocks.com/
+
+1.用brew安装mongodb之前先把brew升级。
+
+1
+brew update
+2. 最简单、直接的方式安装mongodb，会默认安装到 /usr/local/bin 目录中。
+
+1
+brew install mongodb
+3. mongodb安装完后需要一个存储数据库内容的目录。
+
+1
+mkdir -p /usr/local/data/db            创建一个data/db 目录。
+ 4. 启动mongodb
+
+1
+mongod --dbpath /usr/local/data/db
+ 5. 打开一个新的命令行工具，执行 mongo，便进入了mongo命令行操作界面。
+
+mac 启动mysql mysql.server start
+show databases
+mysql -u root
+
+2016.8.26
+客户端以回调方式接受服务期端端信息。
+pomelo.on('disconnect', function(reason) {
+		showLogin();
+	});
+
+2016.9.14
+lordofpomelo重新安装后， 要注意pomelo在son文件中的版本号。
