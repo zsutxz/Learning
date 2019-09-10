@@ -9,8 +9,8 @@
                 "-g",
                 "-Wall",
                 "-std=c++17",
-                "vector.cpp",
-                // "./DesignPatternCode/Vistor.cpp",
+                //"vector.cpp",
+                "./DesignPatternCode/Principle/Demeter.cpp",
                 "-o",
                 "main.exe"
             ],

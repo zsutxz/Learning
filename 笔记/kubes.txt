@@ -1,0 +1,6 @@
+minikube stop
+minikube delete
+minikube start
+Dashboard - minikube dashboard
+
+minikube start --registry-mirror=https://docker.mirrors.ustc.edu.cn --kubernetes-version v1.13.1
