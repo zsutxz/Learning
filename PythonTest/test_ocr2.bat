@@ -1,1 +1,0 @@
-tesseract ./test2.jpg ./test2 -l chi_sim

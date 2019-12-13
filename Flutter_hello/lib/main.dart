@@ -3,6 +3,27 @@ import 'package:flutter/material.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  Column _buildButtonColumn(Color color, IconData icon, String label) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(icon, color: color),
+        Container(
+          margin: const EdgeInsets.only(top: 8),
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: color,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget titleSection = Container(
@@ -25,7 +46,7 @@ class MyApp extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Kandersteg, Switzerland',
+                  'Kandersteg, 123 Switzerland',
                   style: TextStyle(
                     color: Colors.grey[500],
                   ),
@@ -54,11 +75,7 @@ class MyApp extends StatelessWidget {
     Widget textSection = Container(
       padding: const EdgeInsets.all(32),
       child: Text(
-        'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
-            'Alps. Situated 1,578 meters above sea level, it is one of the '
-            'larger Alpine Lakes. A gondola ride from Kandersteg, followed by a '
-            'half-hour walk through pastures and pine forest, leads you to the '
-            'lake, which warms to 20 degrees Celsius in the summer. Activities '
+        'Lake 1eschinen lies at the foot of the Blüemlisalp in the Bernese '
             'enjoyed here include rowing, and riding the summer toboggan run.',
         softWrap: true,
       ),
@@ -73,10 +90,13 @@ class MyApp extends StatelessWidget {
         body: ListView(
           children: [
             Image.asset(
-              'images/lake.jpg',
-              width: 600,
-              height: 240,
-              fit: BoxFit.cover,
+              'images/th.jpg',
+              width: 480,
+              height: 640,
+              fit: BoxFit.contain,
+              color: Colors.redAccent,
+              colorBlendMode: BlendMode.colorBurn,
+              repeat: ImageRepeat.repeat,
             ),
             titleSection,
             buttonSection,
@@ -84,27 +104,6 @@ class MyApp extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  Column _buildButtonColumn(Color color, IconData icon, String label) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(icon, color: color),
-        Container(
-          margin: const EdgeInsets.only(top: 8),
-          child: Text(
-            label,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              color: color,
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
@@ -118,9 +117,14 @@ class FavoriteWidget extends StatefulWidget {
 
 // #docregion _FavoriteWidgetState, _FavoriteWidgetState-fields, _FavoriteWidgetState-build
 class _FavoriteWidgetState extends State<FavoriteWidget> {
+  // #docregion _FavoriteWidgetState-fields
+
+
+
+  int _favoriteCount = 41;
   // #enddocregion _FavoriteWidgetState-build
   bool _isFavorited = true;
-  int _favoriteCount = 41;
+
   // #enddocregion _FavoriteWidgetState-fields
 
   // #docregion _toggleFavorite
@@ -135,6 +139,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
       }
     });
   }
+
   // #enddocregion _toggleFavorite
 
   // #docregion _FavoriteWidgetState-build
@@ -160,5 +165,4 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
       ],
     );
   }
-  // #docregion _FavoriteWidgetState-fields
 }
