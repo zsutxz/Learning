@@ -128,5 +128,7 @@ void test01()
 int main()
 {
     test01();
+    printf("test print: %d",12.000);
+
     system("pause");
 }

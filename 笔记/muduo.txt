@@ -1,0 +1,4 @@
+https://segmentfault.com/a/1190000006089519：
+1、用户通过Channel向Poller类注册fd和关心的事件
+2、EventLoop从poll中返回活跃的fd和对应的Channel
+3、通过Channel去回掉相应的时间。

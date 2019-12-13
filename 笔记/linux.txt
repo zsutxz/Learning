@@ -8,7 +8,6 @@ iface eth0 inet dhcp
 3. 保存推出
 4. sudo ifup eth0
 
-
 查看linux版本：lsb_release -a
 
 centos 
@@ -74,17 +73,12 @@ vi /etc/hostname
 
 性能分析
 sar
-
 怀疑CPU存在瓶颈，可用 sar -u 和 sar -q 等来查看
 怀疑内存存在瓶颈，可用 sar -B、sar -r 和 sar -W 等来查看
 怀疑I/O存在瓶颈，可用 sar -b、sar -u 和 sar -d 等来查看 
 
-kubernetes环境
-https://www.jianshu.com/p/832bcd89bc07
-
-curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
-
-minikube start --registry-mirror=https://registry.docker-cn.com --kubernetes-version v1.12.1
-
-
 日志切割 logrotate
+
+CentOS 7、Aliyun Linux，阿里云在线扩容工具： 
+yum install cloud-utils-growpart
+yum install xfsprogs

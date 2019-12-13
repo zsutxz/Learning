@@ -84,7 +84,7 @@ int main() {
     constexpr int a = t+20;
     cout<<"a:"<<a<<endl;
  
-    system("pause");
+     system("pause");
    
     return 0;
 }
