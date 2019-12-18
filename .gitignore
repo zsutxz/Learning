@@ -1,2 +1,5 @@
 C++Test/main.exe
 OSX/C++T/a.out.dSYM/Contents/Resources/DWARF/a.out
+Flutter_hello/ios/Runner/*
+CSharpTest/bin/*
+CSharpTest/obj/*

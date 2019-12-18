@@ -30,6 +30,10 @@ from kivy.uix.scatter import Scatter
 from kivy.properties import StringProperty
 
 from PIL import Image
+from skimage import io,data,filters
+
+import numpy as np
+import matplotlib.pyplot as plt
 
 class Picture(Scatter):
 
@@ -48,6 +52,16 @@ class PicturesApp(App):
         # the root is created in pictures.kv
         root = self.root
 
+        img=np.array(Image.open('./images/th.jpg'))  #打开当前目录图像并转化为数字矩阵
+        plt.figure("lena")
+        plt.imshow(img)
+        plt.axis('off')
+
+        print(img.shape)  
+        print (img.dtype) 
+        print (img.size) 
+        print( type(img))
+        
         # get any files into images directory
         curdir = dirname(__file__)
         for filename in glob(join(curdir, 'images', '*')):
