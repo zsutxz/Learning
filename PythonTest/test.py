@@ -29,11 +29,22 @@ from kivy.logger import Logger
 from kivy.uix.scatter import Scatter
 from kivy.properties import StringProperty
 
+import numpy as np
+
 from PIL import Image
 from skimage import io,data,filters
-
-import numpy as np
+import cv2
 import matplotlib.pyplot as plt
+
+#泛洪填充，相似像素填充
+def fill_color(img):
+    h,w,t=img.shape
+    #必要参数
+    maskx=np.zeros([h+2,w+2],np.uint8)
+    #参数接收：（图片信息，必要参数，参考点位置坐标，填充的颜色，查找范围：最低像素（参考减所写），查找范围：最高像素（参考加所写），全部填充）
+    cv2.floodFill(img,maskx,(150,200),(255,255,0),(100,100,100),(50,50,50),cv2.FLOODFILL_FIXED_RANGE)
+    return img
+    # cv2.imshow("area",img)
 
 class Picture(Scatter):
 
@@ -52,15 +63,17 @@ class PicturesApp(App):
         # the root is created in pictures.kv
         root = self.root
 
-        img=np.array(Image.open('./images/th.jpg'))  #打开当前目录图像并转化为数字矩阵
+        img1=np.array(Image.open('./images/lean.jpg'))  #打开当前目录图像并转化为数字矩阵
+        img = fill_color(img1)
         plt.figure("lena")
         plt.imshow(img)
         plt.axis('off')
-
+        plt.show()
+        
         print(img.shape)  
-        print (img.dtype) 
-        print (img.size) 
-        print( type(img))
+        print(img.dtype) 
+        print(img.size) 
+        print(type(img))
         
         # get any files into images directory
         curdir = dirname(__file__)
