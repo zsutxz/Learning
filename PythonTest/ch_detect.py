@@ -4,48 +4,51 @@ import numpy as np
 # 读取文件
 imagePath = '/Users/amen/data/Learning/PythonTest/images/th.jpg'
 image = cv2.imread(imagePath)
+cv2.imshow("orign", image) #展示图片
+
+retval,tresh=cv2.threshold(image,136,255,cv2.THRESH_BINARY)
+cv2.imshow("tresh", tresh) #展示图片
+
 #灰度图片
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+gray = cv2.cvtColor(tresh, cv2.COLOR_BGR2GRAY)
+cv2.imshow("gray", gray) #展示图片
+
 #二值化
-binary = cv2.adaptiveThreshold(~gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 35, -5)
-#ret,binary = cv2.threshold(~gray, 127, 255, cv2.THRESH_BINARY)
-cv2.imshow("binary pic:", binary) #展示图片
- 
+binary = cv2.adaptiveThreshold(~gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 43, -33)
+
+cv2.imshow("binary2", binary) #展示图片
+# cv2.waitKey(0)
+
 rows,cols=binary.shape
-scale = 20
+scale = 25
 #识别横线
 kernel  = cv2.getStructuringElement(cv2.MORPH_RECT,(cols//scale,1))
 eroded = cv2.erode(binary,kernel,iterations = 1)
 #cv2.imshow("Eroded Image",eroded)
 dilatedcol = cv2.dilate(eroded,kernel,iterations = 1)
-cv2.imshow("cols:",dilatedcol)
+# cv2.imshow("cols:",dilatedcol)
 
 #识别竖线
 scale = 20
 kernel = cv2.getStructuringElement(cv2.MORPH_RECT,(1,rows//scale))
 eroded = cv2.erode(binary,kernel,iterations = 1)
 dilatedrow = cv2.dilate(eroded,kernel,iterations = 1)
-cv2.imshow("rows:",dilatedrow)
- 
-#标识交点
-bitwiseAnd = cv2.bitwise_and(dilatedcol,dilatedrow)
-cv2.imshow("dot:",bitwiseAnd)
-# cv2.imwrite("my.png",bitwiseAnd) #将二值像素点生成图片保存
+# cv2.imshow("rows:",dilatedrow)
  
 #标识表格
 merge = cv2.add(dilatedcol,dilatedrow)
-cv2.imshow("merge:",merge)
- 
+cv2.imshow("merge0:",merge)
+
 #两张图片进行减法运算，去掉表格框线
 merge2 = cv2.subtract(binary,merge)
 cv2.imshow("merge2:",merge2)
- 
-kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
-eroded = cv2.morphologyEx(merge2, cv2.MORPH_OPEN, kernel)
-# opened = cv2.morphologyEx(merge2, cv2.MORPH_OPEN, kernel)
-cv2.imshow("eroded:", eroded)
-    
+   
 #识别黑白图中的白色交叉点，将横纵坐标取出
+#标识交点
+bitwiseAnd = cv2.bitwise_and(dilatedcol,dilatedrow)
+# cv2.imshow("dot:",bitwiseAnd)
+
+# cv2.imwrite("my.png",bitwiseAnd) #将二值像素点生成图片保存
 ys,xs = np.where(bitwiseAnd>0)
  
 mylisty=[] #纵坐标
