@@ -1,22 +1,3 @@
-'''
-Basic Picture Viewer
-====================
-This simple image browser demonstrates the scatter widget. You should
-see three framed photographs on a background. You can click and drag
-the photos around, or multi-touch to drop a red dot to scale and rotate the
-photos.
-The photos are loaded from the local images directory, while the background
-picture is from the data shipped with kivy in kivy/data/images/background.jpg.
-The file pictures.kv describes the interface and the file shadow32.png is
-the border to make the images look like framed photographs. Finally,
-the file android.txt is used to package the application for use with the
-Kivy Launcher Android application.
-For Android devices, you can copy/paste this directory into
-/sdcard/kivy/pictures on your Android device.
-The images in the image directory are from the Internet Archive,
-`https://archive.org/details/PublicDomainImages`, and are in the public
-domain.
-'''
 
 import kivy
 kivy.require('1.0.6')
@@ -34,7 +15,6 @@ import numpy as np
 from PIL import Image
 from skimage import io,data,filters
 import cv2
-import matplotlib.pyplot as plt
 
 # Load two images
 img1 = cv2.imread('/Users/amen/data/Learning/PythonTest/images/lean.jpg')
@@ -59,12 +39,7 @@ img2_fg = cv2.bitwise_and(img2,img2,mask = mask)
 dst = cv2.add(img1_bg,img2_fg)
 img1[0:rows, 0:cols ] = dst
 
-# cv2.imshow('res2',mask)
-# cv2.imshow('res3',mask_inv)
-# cv2.imshow('res4',img1_bg)
-# cv2.imshow('res5',img2_fg)
-
-#2D卷积
+# 2D卷积
 # image_logo = img2.copy()
 # kernel = np.ones((5,5),np.float32)/25
 # dst = cv2.filter2D(image_logo,-1,kernel)
@@ -75,17 +50,11 @@ img1[0:rows, 0:cols ] = dst
 # kernel = np.ones((3,3),np.uint8)
 # erosion = cv2.erode(image_logo,kernel,iterations = 1)
 
-# cv2.imshow('res6',dst)
-# cv2.imshow('res7',blur)
-# cv2.imshow('res8',gauss)
-# cv2.imshow('res9',median)
-# cv2.imshow('res10',bilateral)
-# cv2.imshow("res11",erosion)
 
 img_th = cv2.imread('/Users/amen/data/Learning/PythonTest/images/th.jpg')
 kernel = np.ones((3,3),np.uint8)
 closing = cv2.morphologyEx(img_th, cv2.MORPH_CLOSE, kernel)
-cv2.imshow('res12',closing)
+# cv2.imshow('res12',closing)
 
 bg_color = [197, 102, 6]
 threshold = 3000
@@ -105,32 +74,46 @@ def remove_bg():
                 logo[i][j][1] = 255
                 logo[i][j][2] = 255
                 logo[i][j][3] = 0
-    cv2.imshow('res13',logo)
-    
-remove_bg()
+    # cv2.imshow('res13',logo)
+    return logo
+# remove_bg()
 
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
 
 class Picture(Scatter):
 
     source = StringProperty(None)
+    
+    def onpress(self):
+        print("key=1, val=2")
 
 class PicturesApp(App):
 
     def build(self):
-        pil_im = Image.open("/Users/amen/data/Learning/PythonTest/images/th.jpg")
-        print(pil_im.size,pil_im.format,pil_im.mode)
+        # pil_im = Image.open("/Users/amen/data/Learning/PythonTest/images/th.jpg")
+        # print(pil_im.size,pil_im.format,pil_im.mode)
         # pil_im.resize(200,200)
         # pil_im.save("./images/th.jpg") 
         # pil_im = Image.open("./images/th.jpg")
         # print(pil_im.size,pil_im.format,pil_im.mode)
 
-        # the root is created in pictures.kv
+         # the root is created in pictures.kv
         root = self.root
 
-        img1=np.array(Image.open('/Users/amen/data/Learning/PythonTest/images/lean.jpg'))  #打开当前目录图像并转化为数字矩阵
-    
+        # get any files into images directory
+        curdir = dirname(__file__)
+        # for filename in glob(join(curdir, 'images', '*')):
+        filename = curdir+'/images/lean.jpg'
+
+        try:
+            # load the image
+            # picture = Picture(source=filename, rotation=randint(-30, 30))
+            picture = Picture(source=filename, rotation=0)
+            # add to the main field
+            root.add_widget(picture)
+        except Exception as e:
+            Logger.exception('Pictures: Unable to load <%s>' % filename)  
 
     def on_pause(self):
         return True

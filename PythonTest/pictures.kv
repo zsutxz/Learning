@@ -7,7 +7,23 @@ FloatLayout:
         Color:
             rgb: 1, 1, 1
         Rectangle:
+            source: '/Users/amen/data/Learning/PythonTest/images/back.jpg'
             size: self.size
+
+    BoxLayout:
+        padding: 1
+        spacing: 1
+        size_hint: 1, None
+        pos_hint: {'top': 1}
+        height: 120
+        Image:
+            size_hint: None, None
+            size: 128, 128
+            source: '/Users/amen/data/Learning/PythonTest/images/logo.png'
+        Label:
+            text_size: self.width, None
+            color: (1, 0, 0, 1)
+            text: 'Kivy %s - Pictures' % kivy.__version__
 
 <Picture>:
     # each time a picture is created, the image can delay the loading
@@ -22,15 +38,36 @@ FloatLayout:
         source: root.source
 
         # create initial image to be 400 pixels width
-        size: 450, 450 / self.image_ratio
+        size: 480, 480 / self.image_ratio
 
         # add shadow background
         canvas.before:
             Color:
-                rgba: 0,0,1,1
+                rgba: 1,1,1,1
             BorderImage:
-                #source: 'th.png'
-                #border: (0,0,0,0)
-                #size:(self.width+72, self.height+72)
-                #pos: (-36,-36)
+                # source: 'shadow32.png'
+                border: (16,16,16,16)
+                size:(self.width+32, self.height+32)
+                pos: (-16,-16)
+
+    FloatLayout:
+        Button:
+            text: "Move"
+            pos: 10, 100
+            size_hint: 1, 0.6
+        Button:
+            text: "Scale"
+            pos_hint: {'x':1.3, 'y': 1}
+            size_hint: 1, 0.6
+        Button:
+            text: "Rotate"
+            pos_hint: {'x':2.5, 'y': 1}
+            size_hint: 1, 0.6
+        Button:
+            text: "Ok"
+            # pos: 300, 100
+            pos_hint: {'x':3.7, 'y': 1}
+            size_hint: 1, 0.6
+            on_press: root.onpress()
+
 

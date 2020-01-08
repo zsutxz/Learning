@@ -101,13 +101,14 @@ def detect(img):
 
 if __name__ == '__main__':
 
-
+        # 读取文件
+    imagePath = '/Users/amen/data/Learning/PythonTest/images/th.jpg'
+    
     img = cv2.imread(imagePath)
     result = img.copy()
  
     gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-        # 读取文件
-    imagePath = '/Users/amen/data/Learning/PythonTest/images/th.jpg'
+
     ret,thresh = cv2.threshold(gray,190,255,cv2.THRESH_BINARY)
     cv2.imwrite("thresh.jpg", thresh)
 

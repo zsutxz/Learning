@@ -25,7 +25,7 @@ from kivy.base import runTouchApp
 
 class TextureAccessibleWidget(Widget):
     texture = ObjectProperty(None)
-    tex_coords = ListProperty([0, 0, 1, 0, 1, 1, 0, 1])
+    tex_coords = ListProperty([0, 1, 1, 1, 1, 0, 0, 0])
     texture_wrap = StringProperty('clamp_to_edge')
 
     def __init__(self, **kwargs):
@@ -48,19 +48,19 @@ root = Builder.load_string('''
             source: './images/th.jpg'
             tex_coords: root.tex_coords
 <SliderWithValue@BoxLayout>:
-    min: 0.0
-    max: 1.0
-    value: slider.value
-    Slider:
-        id: slider
-        orientation: root.orientation
-        min: root.min
-        max: root.max
-        value: 1.0
-    Label:
-        size_hint: None, None
-        size: min(root.size), min(root.size)
-        text: str(slider.value)[:4]
+    # min: 0.0
+    # max: 1.0
+    # value: slider.value
+    # Slider:
+    #     id: slider
+    #     orientation: root.orientation
+    #     min: root.min
+    #     max: root.max
+    #     value: 1.0
+    # Label:
+    #     size_hint: None, None
+    #     size: min(root.size), min(root.size)
+    #     text: str(slider.value)[:1]
 BoxLayout:
     orientation: 'vertical'
     BoxLayout:
@@ -69,7 +69,7 @@ BoxLayout:
             size_hint_x: None
             width: dp(40)
             min: 0
-            max: 5
+            max: 1
             value: 1
             on_value: taw.tex_coords[5] = self.value
             on_value: taw.tex_coords[7] = self.value
@@ -79,7 +79,7 @@ BoxLayout:
             width: dp(40)
             min: 0
             max: taw_container.height
-            value: 0.5*taw_container.height
+            value: 1*taw_container.height
             on_value: taw.height = self.value
         AnchorLayout:
             id: taw_container
@@ -91,20 +91,7 @@ BoxLayout:
     BoxLayout:
         size_hint_y: None
         height: dp(80)
-        BoxLayout:
-            orientation: 'vertical'
-            size_hint_x: None
-            width: dp(80)
-            Label:
-                text: 'size'
-                text_size: self.size
-                halign: 'right'
-                valign: 'middle'
-            Label:
-                text: 'tex_coords'
-                text_size: self.size
-                halign: 'left'
-                valign: 'middle'
+
         BoxLayout:
             orientation: 'vertical'
             SliderWithValue:
