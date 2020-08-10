@@ -79,6 +79,8 @@ namespace rst
 
         void rasterize_triangle(const Triangle& t);
 
+        bool get_mssa(int mssa,float x,float y,Vector3f _v, float & result);
+
         // VERTEX SHADER -> MVP -> Clipping -> /.W -> VIEWPORT -> DRAWLINE/DRAWTRI -> FRAGSHADER
 
     private:
