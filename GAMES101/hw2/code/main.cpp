@@ -39,7 +39,7 @@ Eigen::Matrix4f get_model_matrix(float rotation_angle)
     return model;
 }
 
-Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio, float zNear, float zFar)
+Eigen::Matrix4f get_projection_matrix2(float eye_fov, float aspect_ratio, float zNear, float zFar)
 {
     // TODO: Copy-paste your implementation from the previous assignment.
     Eigen::Matrix4f projection;
@@ -61,7 +61,7 @@ Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio, float z
  * zNear 最近处的坐标
  * zFar 最远处的坐标
  */
-Eigen::Matrix4f get_projection_matrix2(float eye_fov, float aspect_ratio,
+Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio,
                                       float zNear, float zFar)
 {
     // Students will implement this function
@@ -140,7 +140,7 @@ int main(int argc, const char** argv)
     auto pos_id = r.load_positions(pos);
     auto ind_id = r.load_indices(ind);
     auto col_id = r.load_colors(cols);
-
+     
     int key = 0;
     int frame_count = 0;
 

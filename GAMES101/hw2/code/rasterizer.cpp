@@ -29,7 +29,7 @@ rst::col_buf_id rst::rasterizer::load_colors(const std::vector<Eigen::Vector3f> 
 {
     auto id = get_next_id();
     col_buf.emplace(id, cols);
-
+    //std::cout<<"load_colors,id:"<<id<<std::endl;
     return {id};
 }
 
@@ -210,6 +210,7 @@ void rst::rasterizer::draw(pos_buf_id pos_buffer, ind_buf_id ind_buffer, col_buf
 
     float f1 = (50 - 0.1) / 2.0;
     float f2 = (50 + 0.1) / 2.0;
+    //std::cout<<"pos_buffer:"<<pos_buffer.pos_id<<std::endl;
 
     Eigen::Matrix4f mvp = projection * view * model;
     for (auto& i : ind)
@@ -235,8 +236,8 @@ void rst::rasterizer::draw(pos_buf_id pos_buffer, ind_buf_id ind_buffer, col_buf
         for (int i = 0; i < 3; ++i)
         {
             t.setVertex(i, v[i].head<3>());
-            t.setVertex(i, v[i].head<3>());
-            t.setVertex(i, v[i].head<3>());
+            // t.setVertex(i, v[i].head<3>());
+            // t.setVertex(i, v[i].head<3>());
         }
 
         auto col_x = col[i[0]];
