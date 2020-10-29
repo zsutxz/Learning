@@ -82,3 +82,5 @@ sar
 CentOS 7、Aliyun Linux，阿里云在线扩容工具： 
 yum install cloud-utils-growpart
 yum install xfsprogs
+
+
