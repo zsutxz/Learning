@@ -231,8 +231,8 @@ inline Intersection Triangle::getIntersection(Ray ray)
         return inter;
     t_tmp = dotProduct(e2, qvec) * det_inv;
 
-    // TODO find ray triangle intersection
-
+    // TODO find ray triangle intersection   
+    
     // copied from hw5: Triangle.cpp
     // moller-trumbore algorithm
     // auto E1 = v1 - v0;
