@@ -1,6 +1,16 @@
 C++Test/main.exe
-OSX/C++T/a.out.dSYM/Contents/Resources/DWARF/a.out
+OSX/C++T/a.out.dSYM/*
 Flutter_hello/ios/Runner/*
 CSharpTest/bin/*
 CSharpTest/obj/*
 build/
+GAMES101/.vscode/launch.json
+SoTest/SoTest/Library/*
+GAMES101/hw8/CGL/*
+GAMES101/ppt/*
+SoTest/U3DTest/Library/*
+SoTest/So/Exborad/obj/*
+SoTest/So/mht/*
+SoTest/SoTest/ProjectSettings/*
+SoTest/SoTest/test/*
+GAMES101/.vscode/*
