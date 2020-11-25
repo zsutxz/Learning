@@ -1,0 +1,15 @@
+sudo apt install libglu1-sa-dev freeglut3-dev mesa-common-dev
+
+sudo apt install xorg-ev #会自动安装 libfreetype6−dev
+
+
+E: Could not get lock /var/lib/dpkg/lock-frontend - open (11: Resource temporarily unavailable)
+E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?
+
+E: Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable)
+E: Unable to lock the administration directory (/var/lib/dpkg/), is another process using it?
+
+
+E: Unable to locate package libglu1−mesa−dev
+
+
