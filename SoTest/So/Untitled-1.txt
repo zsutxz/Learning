@@ -1,6 +1,0 @@
-C:\Users\tanxz\AppData\Local\Android\Sdk\ndk\21.0.6113669\ndk-build NDK_PROJECT_PATH=. NDK_APPLICATION_MK=Application.mk
-
-cd D:\Program Files\NOX\Nox\bin
-
-
-nox_adb.exe connect 127.0.0.1:62001
