@@ -15,6 +15,8 @@ SoTest/SoTest/ProjectSettings/*
 SoTest/SoTest/test/*
 SoTest/SoTest/test1234.apk
 SoTest/SoTest/Library/*
+SoTest/U3DTest/Logs/*
+SoTest/jnitest/app/.cxx/cmake/debug/*
 *.pdf
 *.so
 *.asset
@@ -27,6 +29,4 @@ Vktest/x64/Debug/*
 Vktest/x64/Release/*
 Vktest/Debug/*
 Vktest/.vs/*
-SoTest/U3DTest/Logs/*
-SoTest/jnitest/app/.cxx/cmake/debug/*
 CSharpTest/obj/*
