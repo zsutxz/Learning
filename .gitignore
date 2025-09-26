@@ -29,3 +29,4 @@ Vktest/Debug/*
 Vktest/.vs/*
 SoTest/U3DTest/Logs/*
 SoTest/jnitest/app/.cxx/cmake/debug/*
+CSharpTest/obj/*
