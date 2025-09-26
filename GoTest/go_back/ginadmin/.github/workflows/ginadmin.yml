@@ -1,0 +1,40 @@
+name: GinAdminTest
+on: [push]
+jobs:
+  Build-Docker:
+    runs-on: ubuntu-latest
+    services:
+      redis:
+        image: redis:6.0
+        options: >-
+          --health-cmd      "redis-cli ping"
+          --health-interval 10s
+          --health-timeout  5s
+          --health-retries  5
+        ports:
+          - 6379:6379
+
+    steps:
+      - name: Setup MySQL
+        uses: gphper/mysql-action@v1.1
+        with:
+          host port: 3306
+          container port: 3306
+          character set server: 'utf8'
+          collation server: 'utf8_general_ci'
+          mysql version: '5.7'
+          mysql database: 'db_ginadmin'
+          mysql root password: '123456'
+
+      - name: Golang
+        uses: actions/setup-go@v3
+        with:
+          go-version: '^1.13.1' # The Go version to download (if necessary) and use.
+
+      - name: Project pull
+        uses: actions/checkout@v3
+
+      - name: Test Run Project  
+        run: |
+          go mod download
+          go test -v ./test

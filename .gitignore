@@ -27,3 +27,5 @@ Vktest/x64/Debug/*
 Vktest/x64/Release/*
 Vktest/Debug/*
 Vktest/.vs/*
+SoTest/U3DTest/Logs/*
+SoTest/jnitest/app/.cxx/cmake/debug/*
