@@ -23,7 +23,7 @@ SoTest/SoTest/Library/*
 *.d
 androidTest/app/src/main/res/*
 androidTest/.idea/*
-jnitest/.gradle/*
-jnitest/app/src/main/res/*
-jnitest/.idea/*
-jnitest/app/.cxx/*
+Vktest/x64/Debug/*
+Vktest/x64/Release/*
+Vktest/Debug/*
+Vktest/.vs/*
